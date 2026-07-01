@@ -1,0 +1,175 @@
+.tier-bronze {
+    background: linear-gradient(
+        180deg,
+        #f7c58a 0%,
+        #d98b42 25%,
+        #b96d2f 50%,
+        #8c4f1f 75%,
+        #f0b06a 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(217, 139, 66, 0.4),
+        0 0 20px rgba(140, 79, 31, 0.3);
+}
+
+.tier-silver {
+    background: linear-gradient(
+        180deg,
+        #a4b0b7 0%,
+        #acbcc6 25%,
+        #7d95a5 50%,
+        #5a6d7c 75%,
+        #9ba8b0 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(18, 26, 28, 0.4),
+        0 0 20px rgba(34, 46, 55, 0.3);
+}
+
+.tier-gold {
+    background: linear-gradient(
+        180deg,
+        #f6ca4e 0%,
+        #ffe64d 25%,
+        #c98b19 50%,
+        #bd7707 75%,
+        #fff47e 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(194, 122, 3, 0.4),
+        0 0 20px rgba(72, 46, 11, 0.3);
+}
+
+.tier-platinum {
+    background: linear-gradient(
+        180deg,
+        #09d7d7 0%,
+        #09cdcc 25%,
+        #00a4a6 50%,
+        #009291 75%,
+        #2beef4 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(26, 83, 89, 0.4),
+        0 0 20px rgba(0, 51, 59, 0.3);
+}
+
+.tier-diamond {
+    background: linear-gradient(
+        180deg,
+        #8a4cf7 0%,
+        #7a3ee5 25%,
+        #672bd1 50%,
+        #480ead 75%,
+        #925fea 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(84, 33, 177, 0.4),
+        0 0 20px rgba(58, 14, 137, 0.3);
+}
+
+.tier-master {
+    background: linear-gradient(
+        180deg,
+        #de3f60 0%,
+        #d14e6a 25%,
+        #c12d4c 50%,
+        #b01e3d 75%,
+        #c8546c 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(165, 39, 24, 0.4),
+        0 0 20px rgba(135, 26, 13, 0.3);
+}
+
+.tier-grandmaster {
+    background: linear-gradient(
+        180deg,
+        #71b3f6 0%,
+        #5a9de1 25%,
+        #397dc2 50%,
+        #2266aa 75%,
+        #5a98d8 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(0, 61, 163, 0.4),
+        0 0 20px rgba(2, 38, 99, 0.3);
+}
+
+.tier-legend {
+    background: linear-gradient(
+        180deg,
+        #fa5b2c 0%,
+        #e94c1d 25%,
+        #cf390c 50%,
+        #bd340c 75%,
+        #fc5d2e 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 10px rgba(0, 61, 163, 0.4),
+        0 0 20px rgba(2, 38, 99, 0.3);
+}

@@ -1,0 +1,24 @@
+.table-sm tr td,
+.table-sm tr th {
+    padding: 2px 4px;
+}
+
+.table-md tr td,
+.table-md tr th {
+    padding: 10px 12px;
+}
+
+.table-lg tr td,
+.table-lg tr th {
+    padding: 15px 20px;
+}
+
+.table-sticky{
+    position: relative;
+    overflow-y: auto;
+}
+
+thead.table-sticky-selected{
+    position: sticky;
+    top: 0;
+}
