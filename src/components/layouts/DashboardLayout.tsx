@@ -1,16 +1,22 @@
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
+import IconCoin from '@/assets/icon/coin.png';
+import type { Reducers } from '@/redux/types';
+import { initialName } from '@/utils/characters';
+
 import { useTheme } from '../../contexts/themeProvider';
-import { ButtonThemeSwitch } from '../buttons';
+import { ButtonIcon, ButtonThemeSwitch } from '../buttons';
 import DashboardSidebar from './DashboardSidebar';
 import DashboardSidebarCollapse from './DashboardSidebarCollapse';
 import { menuProfile } from './SidebarConfig';
 
 export default function DashboardLayout() {
     const dispatch = useDispatch();
+    const walletState = useSelector((state: Reducers) => state.wallet);
+    const userState = useSelector((state: Reducers) => state.user);
     const [toggleSidebar, setToggleSidebar] = useState<string>('expand');
     const [profileCard, setProfileCard] = useState(false);
     const handleSidebarToggle = () => {
@@ -41,6 +47,46 @@ export default function DashboardLayout() {
                 ) : (
                     <DashboardSidebarCollapse />
                 )}
+                <div
+                    className={`absolute bottom-25 w-full ${toggleSidebar === 'expad' ? 'px-4' : 'px-2'}`}
+                >
+                    <div
+                        className={`flex w-full items-center justify-between gap-2 rounded-md border border-accent-dark/50 bg-light-3 py-2 dark:bg-dark-3/50 ${toggleSidebar === 'expand' ? 'px-5' : 'px-1'}`}
+                    >
+                        <div
+                            className={`flex flex-col gap-2 ${toggleSidebar === 'collapse' && 'm-auto'}`}
+                        >
+                            <p
+                                className={`ty-body-sm text-text-light-secondary dark:text-text-dark-secondary ${toggleSidebar === 'collapse' && 'hidden'}`}
+                            >
+                                Koin Balance
+                            </p>
+                            <div
+                                className={`w-8 items-center gap-2 ${toggleSidebar === 'expand' ? 'flex' : 'flex-col'}`}
+                            >
+                                <img
+                                    src={IconCoin}
+                                    className="w-full"
+                                    alt="coin icon"
+                                />
+                                <p
+                                    className={`text-center text-text-light-primary dark:text-text-dark-primary ${toggleSidebar === 'expand' ? 'ty-h5' : 'ty-body'}`}
+                                >
+                                    {walletState?.detail?.data?.balance}
+                                </p>
+                            </div>
+                        </div>
+                        {toggleSidebar === 'expand' && (
+                            <div>
+                                <ButtonIcon
+                                    icon="ic:round-plus"
+                                    iconSize={20}
+                                    type="button"
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
                 <div className="ty-body-sm absolute bottom-0 m-auto w-full p-4 text-center marker:rounded">
                     <div
                         className="relative z-99 flex w-full cursor-pointer rounded-full bg-accent-light transition-all duration-300 dark:bg-accent-dark"
@@ -49,14 +95,18 @@ export default function DashboardLayout() {
                         tabIndex={0}
                     >
                         <div className="ty-body-lg flex size-12 cursor-pointer items-center justify-center px-4 font-bold text-text-light-primary">
-                            RM
+                            {initialName(
+                                `${userState?.profile?.data?.firstName} ${userState?.profile?.data?.lastName}`
+                            )}
                         </div>
                         <div
                             className={`${toggleSidebar === 'expand' ? 'w-full pl-2 pr-4' : 'w-0 px-0'} flex grow flex-col items-start justify-center overflow-hidden text-text-light-primary`}
                         >
-                            <h4 className="ty-body-sm font-semibold">Nama</h4>
+                            <h4 className="ty-body-sm font-semibold">
+                                {`${userState?.profile?.data?.firstName} ${userState?.profile?.data?.lastName}`}
+                            </h4>
                             <p className="text-text-xs font-medium">
-                                email@email.com
+                                {userState?.profile?.data?.email}
                             </p>
                         </div>
                         {toggleSidebar === 'expand' && (
@@ -75,15 +125,19 @@ export default function DashboardLayout() {
                     >
                         <div className="relative h-25 w-full rounded-t-md bg-accent-dark">
                             <div className="absolute inset-x-0 -bottom-10 m-auto flex size-20 items-center justify-center rounded-full border-4 border-dark-1 bg-accent-dark">
-                                <h2 className="ty-h4 font-bold">RM</h2>
+                                <h2 className="ty-h4 font-bold">
+                                    {initialName(
+                                        `${userState?.profile?.data?.firstName} ${userState?.profile?.data?.lastName}`
+                                    )}
+                                </h2>
                             </div>
                         </div>
                         <div className="flex flex-col items-center justify-center pt-10">
                             <h2 className="ty-body-lg font-bold">
-                                Rizki Malem
+                                {`${userState?.profile?.data?.firstName} ${userState?.profile?.data?.lastName}`}
                             </h2>
                             <h2 className="text-text-xs font-light">
-                                rizkymalm@gmail.com
+                                {userState?.profile?.data?.email}
                             </h2>
                         </div>
                         <nav className="py-4">

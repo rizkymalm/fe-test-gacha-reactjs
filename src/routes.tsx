@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from './components/layouts/DashboardLayout';
+import GachaPage from './pages/GachaPage';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import RedirectPage from './pages/RedirectPage';
@@ -27,6 +28,10 @@ export default function Router() {
                         {
                             path: 'dashboard',
                             element: 'dashboard',
+                        },
+                        {
+                            path: 'gacha',
+                            element: <GachaPage />,
                         },
                     ],
                 },
