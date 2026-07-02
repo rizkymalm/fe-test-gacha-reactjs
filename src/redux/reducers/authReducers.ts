@@ -3,9 +3,12 @@ import { type Action, type AuthState } from '@/redux/types';
 const initialState: AuthState = {
     login: {
         loading: false,
-        data: '',
         error: undefined,
         isLogin: false,
+    },
+    token: {
+        accessToken: '',
+        refreshToken: '',
     },
     actions: {
         loading: false,
@@ -42,8 +45,8 @@ export const authReducers = (
                     isLogin: true,
                     loading: false,
                     error: undefined,
-                    data: action.payload,
                 },
+                token: action.payload,
             };
 
         case 'AUTH_LOGIN_ERROR':
@@ -72,8 +75,11 @@ export const authReducers = (
                 login: {
                     isLogin: false,
                     loading: false,
-                    data: '',
                     error: undefined,
+                },
+                token: {
+                    accessToken: '',
+                    refreshToken: '',
                 },
                 actions: {
                     loading: false,

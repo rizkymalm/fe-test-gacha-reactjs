@@ -14,13 +14,9 @@ const DashboardSidebar = () => {
     };
     return (
         <div className="max-h-screen text-text-light-primary dark:text-text-dark-primary">
-            <img
-                src={LogoRectangle}
-                alt="Logo"
-                className="mx-auto my-2 w-9/12"
-            />
+            <img src={LogoRectangle} alt="Logo" className="mx-4 mt-2 w-19" />
             <nav className="no-scrollbar flex max-h-[80vh] overflow-y-auto">
-                <ul className="w-full list-none p-4">
+                <ul className="w-full list-none px-4">
                     {sidebarConfig.map(item =>
                         item.type === 'menu' ? (
                             <li className="relative my-2" key={item.pathMatch}>

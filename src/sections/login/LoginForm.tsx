@@ -10,7 +10,7 @@ import {
     TextField,
     TextFieldPassword,
 } from '../../components/form';
-// import { postLoginUser } from '../../redux/actions/auth';
+import { postLoginUser } from '../../redux/actions/auth';
 import type { Reducers } from '../../redux/types';
 
 export const LoginForm = () => {
@@ -31,10 +31,14 @@ export const LoginForm = () => {
         },
         validationSchema: LoginSchema,
         onSubmit: async value => {
-            dispatch<any>({
-                type: 'LOGIN',
-                payload: value,
-            });
+            dispatch<any>(
+                await postLoginUser({
+                    data: value,
+                    callback: () => {
+                        window.location.href = '/login/redirect';
+                    },
+                })
+            );
         },
     });
     const { handleSubmit, touched, errors } = formik;

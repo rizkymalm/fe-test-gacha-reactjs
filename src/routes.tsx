@@ -4,6 +4,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
+import RedirectPage from './pages/RedirectPage';
 import type { Reducers } from './redux/types';
 // layouts
 
@@ -31,11 +32,11 @@ export default function Router() {
                 },
                 {
                     path: 'login',
-                    element: authState?.login?.isLogin ? (
-                        <Navigate to="/dashboard" />
-                    ) : (
-                        <Login />
-                    ),
+                    element: <Login />,
+                },
+                {
+                    path: 'login/redirect',
+                    element: <RedirectPage />,
                 },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> },

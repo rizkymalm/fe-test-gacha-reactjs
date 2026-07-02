@@ -22,16 +22,19 @@ export interface Action {
 
 export interface Reducers {
     auth: AuthState;
-    product: ProductState;
     user: UserState;
+    wallet: WalletState;
 }
 
 export interface AuthState {
     login: {
         loading: boolean;
         error: any | undefined;
-        data: any;
         isLogin: boolean;
+    };
+    token: {
+        accessToken: '';
+        refreshToken: '';
     };
     actions?: {
         loading: boolean;
@@ -55,13 +58,22 @@ export interface ProductState {
     };
 }
 
-export interface UserState {
-    list: {
+export interface WalletState {
+    detail: {
         loading: boolean;
         error: any | undefined;
         data: any;
     };
-    detail: {
+    actions?: {
+        loading: boolean;
+        error: any;
+        type: 'success' | 'failed' | null;
+        message: any;
+    };
+}
+
+export interface UserState {
+    profile: {
         loading: boolean;
         error: any | undefined;
         data: any;

@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import IconSquare from '../../assets/icon-dark.png';
+import LogoSquare from '../../assets/logo.png';
 import { sidebarConfig } from './SidebarConfig';
 
 const DashboardSidebarCollapse = () => {
@@ -15,7 +15,7 @@ const DashboardSidebarCollapse = () => {
     return (
         <div>
             <img
-                src={IconSquare}
+                src={LogoSquare}
                 alt="Logo"
                 className="mx-auto my-2 w-8/12 max-w-20"
             />
