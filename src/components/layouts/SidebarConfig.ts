@@ -5,6 +5,11 @@ interface PropSubmenu {
     type: string;
 }
 
+enum UserRole {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
+
 interface PropSidebar {
     name: string;
     icon: string;
@@ -12,6 +17,7 @@ interface PropSidebar {
     pathMatch: string;
     type: string | 'menu' | 'header';
     submenu?: PropSubmenu[];
+    category: UserRole[];
 }
 
 export const sidebarConfig: PropSidebar[] = [
@@ -21,6 +27,7 @@ export const sidebarConfig: PropSidebar[] = [
         link: '/dashboard',
         pathMatch: '/dashboard',
         type: 'menu',
+        category: [UserRole.ADMIN, UserRole.USER],
     },
     {
         name: 'Gacha',
@@ -28,6 +35,15 @@ export const sidebarConfig: PropSidebar[] = [
         link: '/gacha',
         pathMatch: '/gacha',
         type: 'menu',
+        category: [UserRole.ADMIN, UserRole.USER],
+    },
+    {
+        name: 'Admin',
+        icon: 'ri:admin-line',
+        link: '/admin',
+        pathMatch: '/admin',
+        type: 'menu',
+        category: [UserRole.ADMIN],
     },
 ];
 

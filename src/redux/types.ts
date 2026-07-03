@@ -34,6 +34,11 @@ export interface AuthState {
         error: any | undefined;
         isLogin: boolean;
     };
+    role: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
     token: {
         accessToken: '';
         refreshToken: '';

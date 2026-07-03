@@ -16,3 +16,10 @@ export const refreshToken = async (token: string) => {
     });
     return response;
 };
+
+export const authRole = async (token: string) => {
+    const response = await request.get('/role/login', {
+        token,
+    });
+    return response;
+};

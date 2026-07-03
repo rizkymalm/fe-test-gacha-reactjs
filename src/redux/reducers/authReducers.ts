@@ -10,6 +10,11 @@ const initialState: AuthState = {
         accessToken: '',
         refreshToken: '',
     },
+    role: {
+        loading: false,
+        data: '',
+        error: undefined,
+    },
     actions: {
         loading: false,
         error: '',
@@ -92,6 +97,35 @@ export const authReducers = (
                     error: '',
                     type: null,
                     message: '',
+                },
+            };
+
+        // Role
+        case 'AUTH_ROLE_SUCCESS':
+            return {
+                ...state,
+                role: {
+                    ...state.role,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'AUTH_ROLE_LOADING':
+            return {
+                ...state,
+                role: {
+                    ...state.role,
+                    loading: true,
+                    error: '',
+                },
+            };
+        case 'AUTH_ROLE_ERROR':
+            return {
+                ...state,
+                role: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
                 },
             };
 

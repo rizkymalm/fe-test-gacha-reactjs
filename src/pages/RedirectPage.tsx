@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Spinner } from '@/components/features';
 import Page from '@/components/Page';
+import { getAuthRole } from '@/redux/actions/auth';
 import { getWalletAmount } from '@/redux/actions/wallet';
 
 import { getUserProfile } from '../redux/actions/user';
@@ -18,11 +19,18 @@ const RedirectPage = () => {
                     await getUserProfile({
                         callback: async () => {
                             dispatch<any>(
-                                await getWalletAmount({
-                                    callback: () => {
-                                        setTimeout(() => {
-                                            window.location.href = '/dashboard';
-                                        }, 2000);
+                                await getAuthRole({
+                                    callback: async () => {
+                                        dispatch<any>(
+                                            await getWalletAmount({
+                                                callback: () => {
+                                                    setTimeout(() => {
+                                                        window.location.href =
+                                                            '/dashboard';
+                                                    }, 2000);
+                                                },
+                                            })
+                                        );
                                     },
                                 })
                             );
