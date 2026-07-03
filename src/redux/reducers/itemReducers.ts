@@ -1,14 +1,15 @@
-import { type Action, type AuthState } from '@/redux/types';
+import { type Action, type ItemState } from '../types';
 
-const initialState: AuthState = {
-    login: {
+const initialState: ItemState = {
+    listGroup: {
         loading: false,
+        data: '',
         error: undefined,
-        isLogin: false,
     },
-    token: {
-        accessToken: '',
-        refreshToken: '',
+    list: {
+        loading: false,
+        data: '',
+        error: undefined,
     },
     actions: {
         loading: false,
@@ -18,85 +19,72 @@ const initialState: AuthState = {
     },
 };
 
-const initialActionAuth: Action = {
+const initialAction: Action = {
     type: '',
 };
 
-export const authReducers = (
-    state = initialState,
-    action = initialActionAuth
-) => {
+export const itemReducers = (state = initialState, action = initialAction) => {
     switch (action.type) {
-        case 'AUTH_LOGIN_LOADING':
+        // list group
+        case 'ITEM_LIST_GROUP_SUCCESS':
             return {
                 ...state,
-                login: {
-                    ...state.login,
+                listGroup: {
+                    ...state.listGroup,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'ITEM_LIST_GROUP_LOADING':
+            return {
+                ...state,
+                listGroup: {
+                    ...state.listGroup,
                     loading: true,
                     error: '',
                 },
             };
-
-        case 'AUTH_LOGIN_SUCCESS':
+        case 'ITEM_LIST_GROUP_ERROR':
             return {
                 ...state,
-                login: {
-                    ...state.login,
-                    isLogin: true,
+                listGroup: {
                     loading: false,
-                    error: undefined,
-                },
-                token: action.payload,
-            };
-
-        case 'AUTH_REFRESH_TOKEN_SUCCESS':
-            return {
-                ...state,
-                token: action.payload,
-            };
-
-        case 'AUTH_LOGIN_ERROR':
-            return {
-                ...state,
-                login: {
-                    ...state.login,
-                    loading: false,
+                    data: '',
                     error: action.payload,
                 },
             };
 
-        case 'AUTH_LOGIN_ERROR_CLEAR':
+        // list
+        case 'ITEM_LIST_SUCCESS':
             return {
                 ...state,
-                login: {
-                    ...state.login,
+                list: {
+                    ...state.list,
                     loading: false,
-                    error: undefined,
+                    data: action.payload,
                 },
             };
-
-        case 'LOGOUT':
+        case 'ITEM_LIST_LOADING':
             return {
                 ...state,
-                login: {
-                    isLogin: false,
-                    loading: false,
-                    error: undefined,
-                },
-                token: {
-                    accessToken: '',
-                    refreshToken: '',
-                },
-                actions: {
-                    loading: false,
+                list: {
+                    ...state.list,
+                    loading: true,
                     error: '',
-                    type: null,
-                    message: '',
+                },
+            };
+        case 'ITEM_LIST_ERROR':
+            return {
+                ...state,
+                list: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
                 },
             };
 
         //  actions
-        case 'AUTH_ACTION_LOADING':
+        case 'WALLET_ACTION_LOADING':
             return {
                 ...state,
                 actions: {
@@ -106,7 +94,7 @@ export const authReducers = (
                     message: '',
                 },
             };
-        case 'AUTH_ACTION_SUCCESS':
+        case 'WALLET_ACTION_SUCCESS':
             return {
                 ...state,
                 actions: {
@@ -116,7 +104,7 @@ export const authReducers = (
                     message: action.payload,
                 },
             };
-        case 'AUTH_ACTION_ERROR':
+        case 'WALLET_ACTION_ERROR':
             return {
                 ...state,
                 actions: {
@@ -126,7 +114,7 @@ export const authReducers = (
                     type: 'failed',
                 },
             };
-        case 'AUTH_ACTION_CLEAR':
+        case 'WALLET_ACTION_CLEAR':
             return {
                 ...state,
                 actions: initialState.actions,

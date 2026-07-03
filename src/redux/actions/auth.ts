@@ -35,3 +35,25 @@ export const postLoginUser =
             }
         }
     };
+
+export const postRefreshToken =
+    ({ callback }: PropsPost) =>
+    async (dispatch: Dispatch, getState: any) => {
+        try {
+            const { token } = getState().auth;
+            const response = await loginUser(token.refreshToken);
+            const data = response?.data?.token;
+            dispatch({
+                type: 'AUTH_REFRESH_TOKEN_SUCCESS',
+                payload: data,
+            });
+
+            callback(response);
+        } catch (error: any) {
+            if (error && error.response) {
+                dispatch({
+                    type: 'LOGOUT',
+                });
+            }
+        }
+    };

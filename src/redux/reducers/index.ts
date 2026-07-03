@@ -4,6 +4,8 @@ import storage from 'redux-persist/lib/storage';
 
 import type { Action } from '../types';
 import { authReducers } from './authReducers';
+import { gachaReducers } from './gachaReducers';
+import { itemReducers } from './itemReducers';
 import { userReducers } from './userReducers';
 import { walletReducers } from './walletReducers';
 
@@ -21,6 +23,8 @@ const appReducer = combineReducers({
     auth: authReducers,
     user: userReducers,
     wallet: walletReducers,
+    gacha: gachaReducers,
+    item: itemReducers,
 });
 
 const rootReducer = (state: any, action: Action) => {

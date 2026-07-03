@@ -221,6 +221,37 @@
     border: 2px solid #ab2903;
 }
 
+.item-bg-silver {
+    background: rgba(32, 34, 37, 0.5);
+    border: 1px solid #6d6d6d;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(87, 88, 89, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(87, 88, 89, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(87, 88, 89, 0.2);
+}
+
+.item-bg-gold {
+    background: rgba(157, 120, 4, 0.1);
+    border: 1px solid #ffd142;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(255, 208, 66, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(255, 208, 66, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(255, 208, 66, 0.2);
+}
+
+.item-bg-diamond {
+    background: rgba(42, 14, 101, 0.1);
+    border: 1px solid #b274c7;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(139, 60, 165, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(139, 60, 165, 025);
+    box-shadow: 0px 0px 5px 2px rgba(139, 60, 165, 0.2);
+}
+.item-bg-legendary {
+    background: rgba(147, 10, 24, 0.3);
+    border: 1px solid #fa2d41;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(165, 31, 44, 0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(165, 31, 44, 0.5);
+    box-shadow: 0px 0px 5px 2px rgba(165, 31, 44, 0.5);
+}
+
 /* gacha */
 .gacha {
     width: 150px;
@@ -247,7 +278,7 @@
 .gacha.shake {
     animation: shake 2s ease;
 }
-.gacha .reward{
+.gacha .reward {
     width: 60px;
     height: 60px;
     border-radius: 6px;
@@ -282,6 +313,8 @@
     }
 }
 
-.gacha .reward.bounce{
-    animation: position 0.5s ease, size 0.8s ease;
+.gacha .reward.bounce {
+    animation:
+        position 0.5s ease,
+        size 0.8s ease;
 }

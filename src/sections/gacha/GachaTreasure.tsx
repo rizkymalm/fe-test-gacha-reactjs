@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BackgroundTreasure from '@/assets/games/background-treasure.png';
 import ItemSilver from '@/assets/games/items/item-gold-guardian-xp.png';
 import ButtonGame from '@/components/buttons/ButtonGame';
+import { CardFlat } from '@/components/cards';
+import SlideshowMultiple from '@/components/slideshow/SlideshowMultiple';
+import { getGachaItem } from '@/redux/actions/gacha';
+import type { Reducers } from '@/redux/types';
 
 const GachaTreasure = () => {
+    const dispatch = useDispatch();
+    const gachaState = useSelector((state: Reducers) => state.gacha);
     const [reward, setReward] = useState({
         open: false,
         item: '',
     });
+
+    useEffect(() => {
+        async function getItem() {
+            dispatch<any>(await getGachaItem({}));
+        }
+        getItem();
+    }, [dispatch]);
+
     const handleOpenTreasure = () => {
         const gachaDiv = document.querySelector('.gacha');
         if (gachaDiv) {
@@ -26,7 +41,7 @@ const GachaTreasure = () => {
     };
     return (
         <div
-            className="relative flex w-full justify-center rounded-lg"
+            className="relative w-full flex-col justify-center overflow-hidden rounded-lg pb-5"
             style={{
                 backgroundImage: `url('${BackgroundTreasure}')`,
                 backgroundPosition: 'center',
@@ -64,6 +79,24 @@ const GachaTreasure = () => {
                         size="md"
                     />
                 </div>
+            </div>
+            <div className="grid w-full grid-cols-1 px-5">
+                <CardFlat colSpan="col-span-12" title="Gacha Reward List">
+                    {gachaState?.item?.loading ? (
+                        'Loading'
+                    ) : gachaState?.item?.data.length > 0 ? (
+                        <SlideshowMultiple
+                            data={gachaState.item.data}
+                            show={5}
+                            ratio="1:1"
+                            hoverIncrease
+                            peek
+                            autoSlide
+                        />
+                    ) : (
+                        'Data error'
+                    )}
+                </CardFlat>
             </div>
         </div>
     );
