@@ -48,7 +48,7 @@ const ButtonGame = ({
             setcolorTheme({
                 background: 'game-bg-gold',
                 text: 'text-text-light-primary',
-                disabled: 'disabled:text-text-light-muted',
+                disabled: 'disabled:text-text-light-primary/50',
             });
         } else {
             setcolorTheme({

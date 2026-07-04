@@ -1,3 +1,4 @@
+import { gachaRandom } from '@/services/gacha.service';
 import { itemListGroup } from '@/services/item.service';
 
 import type { Dispatch } from '../types';
@@ -42,6 +43,46 @@ export const getGachaItem =
             } else {
                 dispatch({
                     type: 'GACHA_ITEM_ERROR',
+                    payload: error,
+                });
+            }
+        }
+    };
+
+export const getGachaRandom =
+    ({ callback }: PropsGet) =>
+    async (dispatch: Dispatch, getState: any) => {
+        dispatch({
+            type: 'GACHA_RANDOM_LOADING',
+        });
+        try {
+            const { token } = getState().auth;
+            const response = await gachaRandom(token.accessToken);
+            dispatch({
+                type: 'GACHA_RANDOM_SUCCESS',
+                payload: response.data,
+            });
+            if (callback) {
+                callback();
+            }
+        } catch (error: any) {
+            if (error && error.response) {
+                if (error.response.status) {
+                    dispatch(
+                        postRefreshToken({
+                            callback: () => {
+                                dispatch(getGachaRandom({ callback }));
+                            },
+                        })
+                    );
+                }
+                dispatch({
+                    type: 'GACHA_RANDOM_ERROR',
+                    payload: error.response.data,
+                });
+            } else {
+                dispatch({
+                    type: 'GACHA_RANDOM_ERROR',
                     payload: error,
                 });
             }

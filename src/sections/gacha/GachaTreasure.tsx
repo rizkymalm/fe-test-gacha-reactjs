@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import BackgroundTreasure from '@/assets/games/background-treasure.png';
-import ItemSilver from '@/assets/games/items/item-gold-guardian-xp.png';
 import ButtonGame from '@/components/buttons/ButtonGame';
 import { CardFlat } from '@/components/cards';
 import SlideshowMultiple from '@/components/slideshow/SlideshowMultiple';
-import { getGachaItem } from '@/redux/actions/gacha';
+import { getGachaItem, getGachaRandom } from '@/redux/actions/gacha';
+import { getWalletAmount } from '@/redux/actions/wallet';
 import type { Reducers } from '@/redux/types';
 
 const GachaTreasure = () => {
     const dispatch = useDispatch();
     const gachaState = useSelector((state: Reducers) => state.gacha);
-    const [reward, setReward] = useState({
-        open: false,
-        item: '',
-    });
+    const walletState = useSelector((state: Reducers) => state.wallet);
+    const [reward, setReward] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function getItem() {
@@ -24,19 +23,34 @@ const GachaTreasure = () => {
         getItem();
     }, [dispatch]);
 
-    const handleOpenTreasure = () => {
+    const handleOpenGacha = async () => {
         const gachaDiv = document.querySelector('.gacha');
         if (gachaDiv) {
+            setLoading(true);
+            setReward(false);
+            gachaDiv.classList.remove('box-open');
+            gachaDiv.classList.add('box-close');
             gachaDiv.classList.remove('shake');
             gachaDiv.classList.add('shake');
-            setTimeout(() => {
-                gachaDiv.classList.remove('box-close');
-                gachaDiv.classList.add('box-open');
-                setReward({
-                    open: true,
-                    item: 'XP',
-                });
-            }, 2000);
+            dispatch<any>(
+                await getGachaRandom({
+                    callback: async () => {
+                        dispatch<any>(
+                            await getWalletAmount({
+                                callback: () => {
+                                    setTimeout(() => {
+                                        gachaDiv.classList.remove('box-close');
+                                        gachaDiv.classList.add('box-open');
+                                        gachaDiv.classList.remove('shake');
+                                        setReward(true);
+                                        setLoading(false);
+                                    }, 2000);
+                                },
+                            })
+                        );
+                    },
+                })
+            );
         }
     };
     return (
@@ -54,10 +68,10 @@ const GachaTreasure = () => {
                         <h2 className="ty-h5 font-extrabold">2000</h2>
                         <p className="ty-body">Points</p>
                     </div>
-                    {reward.open && (
+                    {reward && (
                         <div className="game-bg-silver reward bounce absolute inset-x-0 -top-20 m-auto">
                             <img
-                                src={ItemSilver}
+                                src={gachaState?.random?.data?.image}
                                 className="w-full scale-[1.7]"
                                 alt="item gacha"
                             />
@@ -70,13 +84,25 @@ const GachaTreasure = () => {
                         type="button"
                         color="gold"
                         size="md"
-                        onClick={handleOpenTreasure}
+                        onClick={handleOpenGacha}
+                        disabled={
+                            !!(
+                                walletState?.detail?.data?.balance < 10 ||
+                                loading
+                            )
+                        }
                     />
                     <ButtonGame
                         text="Open 10x"
                         type="button"
                         color="diamond"
                         size="md"
+                        disabled={
+                            !!(
+                                walletState?.detail?.data?.balance < 100 ||
+                                loading
+                            )
+                        }
                     />
                 </div>
             </div>

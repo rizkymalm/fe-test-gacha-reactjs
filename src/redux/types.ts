@@ -99,6 +99,11 @@ export interface GachaState {
         error: any | undefined;
         data: any;
     };
+    random: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
     actions?: {
         loading: boolean;
         error: any;

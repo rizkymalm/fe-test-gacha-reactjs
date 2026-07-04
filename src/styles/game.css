@@ -187,6 +187,10 @@
         #eeae2e 100%
     );
 }
+.game-bg-gold:disabled {
+    background: rgba(238, 174, 46, .5);
+    border: 2px solid transparent;
+}
 
 .game-bg-diamond {
     background: linear-gradient(
@@ -206,6 +210,16 @@
         #3b1d83 50%,
         #3d2081 75%,
         #2d1072 100%
+    );
+}
+.game-bg-diamond:disabled {
+    background: linear-gradient(
+        180deg,
+        #3d2081 0%,
+        #3b1d83 25%,
+        #321579 50%,
+        #2d1072 75%,
+        #3d2081 100%
     );
 }
 
