@@ -13,13 +13,14 @@ interface DialogProps {
     open: boolean;
     onClose: () => void;
     children: ReactNode;
-    width?: 'sm' | 'md' | 'lg';
+    width?: 'xs' | 'sm' | 'md' | 'lg';
     closeOnOutsideClick?: boolean;
     closeButton?: boolean;
     animation?: DialogAnimation;
 }
 
 const widthMap = {
+    xs: 'max-w-xs',
     sm: 'max-w-sm',
     md: 'max-w-md',
     lg: 'max-w-lg',
@@ -134,7 +135,7 @@ const Dialog = ({
                                 type="button"
                                 aria-label="Close dialog"
                                 onClick={onClose}
-                                className="absolute right-3 top-3 rounded-md p-1"
+                                className="absolute right-3 top-3 z-99 rounded-md p-1"
                             >
                                 <Icon icon="mdi:close" width={20} height={20} />
                             </button>

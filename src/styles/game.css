@@ -188,7 +188,7 @@
     );
 }
 .game-bg-gold:disabled {
-    background: rgba(238, 174, 46, .5);
+    background: rgba(238, 174, 46, 0.5);
     border: 2px solid transparent;
 }
 
@@ -267,6 +267,14 @@
 }
 
 /* gacha */
+.gacha-static {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
 .gacha {
     width: 150px;
     height: 150px;
@@ -276,13 +284,15 @@
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 }
 
-.gacha.box-close:hover {
+.gacha.box-close:hover,
+.gacha-static.box-close:hover {
     background-image: url('../assets/games/gacha-treasure-peek.png');
     transition: all;
     animation-duration: 300;
 }
 
-.gacha.box-close {
+.gacha.box-close,
+.gacha-static.box-close {
     background-image: url('../assets/games/gacha-treasure-close.png');
 }
 .gacha.box-open {
@@ -293,8 +303,8 @@
     animation: shake 2s ease;
 }
 .gacha .reward {
-    width: 60px;
-    height: 60px;
+    width: 75px;
+    height: 75px;
     border-radius: 6px;
 }
 
@@ -322,8 +332,8 @@
     }
 
     100% {
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
     }
 }
 

@@ -7,6 +7,7 @@ import { postRefreshToken } from './auth';
 interface PropsGet {
     data?: any;
     callback?: any;
+    queries?: any;
 }
 
 export const getGachaItem =
@@ -50,20 +51,20 @@ export const getGachaItem =
     };
 
 export const getGachaRandom =
-    ({ callback }: PropsGet) =>
+    ({ queries, callback }: PropsGet) =>
     async (dispatch: Dispatch, getState: any) => {
         dispatch({
             type: 'GACHA_RANDOM_LOADING',
         });
         try {
             const { token } = getState().auth;
-            const response = await gachaRandom(token.accessToken);
+            const response = await gachaRandom(token.accessToken, queries);
             dispatch({
                 type: 'GACHA_RANDOM_SUCCESS',
                 payload: response.data,
             });
             if (callback) {
-                callback();
+                callback(response.data);
             }
         } catch (error: any) {
             if (error && error.response) {
@@ -71,7 +72,7 @@ export const getGachaRandom =
                     dispatch(
                         postRefreshToken({
                             callback: () => {
-                                dispatch(getGachaRandom({ callback }));
+                                dispatch(getGachaRandom({ queries, callback }));
                             },
                         })
                     );

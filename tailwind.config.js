@@ -234,7 +234,7 @@ export default {
                     diamond: '#672bd1',
                     master: '#c12d4c',
                     grandmaster: '#397dc2',
-                    legend: '#cf390c',
+                    legendary: '#cf390c',
                 }
             },
             fontSize: {

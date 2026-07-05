@@ -5,9 +5,10 @@ const request = new Api({
     xApiKey: '',
 });
 
-export const gachaRandom = async (token: string) => {
+export const gachaRandom = async (token: string, queries: any) => {
     const response = await request.get('/gacha/random', {
         token,
+        queries,
     });
     return response;
 };

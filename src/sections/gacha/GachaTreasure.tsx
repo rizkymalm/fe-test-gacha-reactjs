@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import BackgroundTreasure from '@/assets/games/background-treasure.png';
 import ButtonGame from '@/components/buttons/ButtonGame';
 import { CardFlat } from '@/components/cards';
+import { Dialog, DialogContent } from '@/components/dialogs';
 import SlideshowMultiple from '@/components/slideshow/SlideshowMultiple';
-import { getGachaItem, getGachaRandom } from '@/redux/actions/gacha';
-import { getWalletAmount } from '@/redux/actions/wallet';
+import { getGachaItem } from '@/redux/actions/gacha';
 import type { Reducers } from '@/redux/types';
+
+import GachaAnimation from './GachaAnimation';
 
 const GachaTreasure = () => {
     const dispatch = useDispatch();
     const gachaState = useSelector((state: Reducers) => state.gacha);
     const walletState = useSelector((state: Reducers) => state.wallet);
-    const [reward, setReward] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [dialogGacha, setDialogGacha] = useState(false);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         async function getItem() {
@@ -23,35 +25,12 @@ const GachaTreasure = () => {
         getItem();
     }, [dispatch]);
 
-    const handleOpenGacha = async () => {
-        const gachaDiv = document.querySelector('.gacha');
-        if (gachaDiv) {
-            setLoading(true);
-            setReward(false);
-            gachaDiv.classList.remove('box-open');
-            gachaDiv.classList.add('box-close');
-            gachaDiv.classList.remove('shake');
-            gachaDiv.classList.add('shake');
-            dispatch<any>(
-                await getGachaRandom({
-                    callback: async () => {
-                        dispatch<any>(
-                            await getWalletAmount({
-                                callback: () => {
-                                    setTimeout(() => {
-                                        gachaDiv.classList.remove('box-close');
-                                        gachaDiv.classList.add('box-open');
-                                        gachaDiv.classList.remove('shake');
-                                        setReward(true);
-                                        setLoading(false);
-                                    }, 2000);
-                                },
-                            })
-                        );
-                    },
-                })
-            );
-        }
+    const handleOpenGacha = async (gachaCount: number) => {
+        setDialogGacha(true);
+        setCount(gachaCount);
+    };
+    const handleCloseDialog = (data: boolean) => {
+        setDialogGacha(data);
     };
     return (
         <div
@@ -62,21 +41,28 @@ const GachaTreasure = () => {
                 backgroundSize: 'cover',
             }}
         >
+            <Dialog
+                open={dialogGacha}
+                onClose={() => {
+                    setDialogGacha(false);
+                }}
+                closeOnOutsideClick={false}
+                animation="slide-up"
+                width="xs"
+            >
+                <DialogContent padding="dense">
+                    <GachaAnimation
+                        count={count}
+                        onCloseDialog={handleCloseDialog}
+                    />
+                </DialogContent>
+            </Dialog>
             <div className="relative h-80 w-full">
-                <div className="gacha box-close absolute inset-x-0 bottom-14 m-auto">
+                <div className="gacha-static box-close absolute inset-x-0 bottom-14 m-auto">
                     <div className="translate-y-[100px] scale-0 text-text-gold transition-all duration-300">
                         <h2 className="ty-h5 font-extrabold">2000</h2>
                         <p className="ty-body">Points</p>
                     </div>
-                    {reward && (
-                        <div className="game-bg-silver reward bounce absolute inset-x-0 -top-20 m-auto">
-                            <img
-                                src={gachaState?.random?.data?.image}
-                                className="w-full scale-[1.7]"
-                                alt="item gacha"
-                            />
-                        </div>
-                    )}
                 </div>
                 <div className="absolute inset-x-0 bottom-0 m-auto flex justify-center gap-2 py-4">
                     <ButtonGame
@@ -84,25 +70,16 @@ const GachaTreasure = () => {
                         type="button"
                         color="gold"
                         size="md"
-                        onClick={handleOpenGacha}
-                        disabled={
-                            !!(
-                                walletState?.detail?.data?.balance < 10 ||
-                                loading
-                            )
-                        }
+                        onClick={() => handleOpenGacha(1)}
+                        disabled={!!(walletState?.detail?.data?.balance < 10)}
                     />
                     <ButtonGame
                         text="Open 10x"
                         type="button"
                         color="diamond"
                         size="md"
-                        disabled={
-                            !!(
-                                walletState?.detail?.data?.balance < 100 ||
-                                loading
-                            )
-                        }
+                        disabled={!!(walletState?.detail?.data?.balance < 100)}
+                        onClick={() => handleOpenGacha(10)}
                     />
                 </div>
             </div>
