@@ -28,7 +28,7 @@ export const getGachaItem =
             }
         } catch (error: any) {
             if (error && error.response) {
-                if (error.response.status) {
+                if (error.response.status === 401) {
                     dispatch(
                         postRefreshToken({
                             callback: () => {
@@ -68,7 +68,7 @@ export const getGachaRandom =
             }
         } catch (error: any) {
             if (error && error.response) {
-                if (error.response.status) {
+                if (error.response.status === 401) {
                     dispatch(
                         postRefreshToken({
                             callback: () => {

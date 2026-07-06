@@ -7,12 +7,20 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     onClick?: any;
     iconSize?: number;
     type: JSX.IntrinsicElements['button']['type'];
+    color?: 'primary' | 'error';
 }
 
-const ButtonIcon = ({ icon, iconSize, type, onClick, ...props }: Props) => {
+const ButtonIcon = ({
+    icon,
+    iconSize,
+    type,
+    onClick,
+    color = 'primary',
+    ...props
+}: Props) => {
     return (
         <button
-            className="flex gap-2 rounded-md border-transparent bg-transparent px-1 text-accent-dark transition-all disabled:text-textlight-muted"
+            className={`flex gap-2 rounded-full border-transparent bg-transparent p-1 ${color === 'primary' ? 'text-accent-dark' : 'text-error'} transition-all hover:bg-accent-light/20 disabled:text-textlight-muted hover:dark:bg-accent-dark/30`}
             type={
                 type === 'submit'
                     ? 'submit'

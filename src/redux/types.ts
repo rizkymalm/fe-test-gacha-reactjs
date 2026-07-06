@@ -26,6 +26,7 @@ export interface Reducers {
     wallet: WalletState;
     gacha: GachaState;
     item: ItemState;
+    event: EventState;
 }
 
 export interface AuthState {
@@ -119,6 +120,35 @@ export interface ItemState {
         data: any;
     };
     list: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    actions?: {
+        loading: boolean;
+        error: any;
+        type: 'success' | 'failed' | null;
+        message: any;
+    };
+}
+
+export interface EventState {
+    list: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    active: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    detail: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    items: {
         loading: boolean;
         error: any | undefined;
         data: any;

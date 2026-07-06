@@ -44,6 +44,26 @@ export const sidebarConfig: PropSidebar[] = [
         pathMatch: '/admin',
         type: 'menu',
         category: [UserRole.ADMIN],
+        submenu: [
+            {
+                name: 'User',
+                link: '/admin/user',
+                pathMatch: '/admin/user',
+                type: 'menu',
+            },
+            {
+                name: 'Event',
+                link: '/admin/event',
+                pathMatch: '/admin/event',
+                type: 'menu',
+            },
+            {
+                name: 'Item',
+                link: '/admin/item',
+                pathMatch: '/admin/item',
+                type: 'menu',
+            },
+        ],
     },
 ];
 
