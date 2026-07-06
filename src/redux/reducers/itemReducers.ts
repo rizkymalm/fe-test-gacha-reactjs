@@ -84,7 +84,7 @@ export const itemReducers = (state = initialState, action = initialAction) => {
             };
 
         //  actions
-        case 'WALLET_ACTION_LOADING':
+        case 'ITEM_ACTION_LOADING':
             return {
                 ...state,
                 actions: {
@@ -94,7 +94,7 @@ export const itemReducers = (state = initialState, action = initialAction) => {
                     message: '',
                 },
             };
-        case 'WALLET_ACTION_SUCCESS':
+        case 'ITEM_ACTION_SUCCESS':
             return {
                 ...state,
                 actions: {
@@ -104,7 +104,7 @@ export const itemReducers = (state = initialState, action = initialAction) => {
                     message: action.payload,
                 },
             };
-        case 'WALLET_ACTION_ERROR':
+        case 'ITEM_ACTION_ERROR':
             return {
                 ...state,
                 actions: {
@@ -114,7 +114,7 @@ export const itemReducers = (state = initialState, action = initialAction) => {
                     type: 'failed',
                 },
             };
-        case 'WALLET_ACTION_CLEAR':
+        case 'ITEM_ACTION_CLEAR':
             return {
                 ...state,
                 actions: initialState.actions,

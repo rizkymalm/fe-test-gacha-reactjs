@@ -98,7 +98,7 @@ const badge = [
         image: BadgeLegend,
         background: BackgroundLegend,
         particles: [243, 51, 30],
-        badgeText: 'text-tier-legend',
+        badgeText: 'text-tier-legendary',
         badgeBg: 'bg-tier-legend',
     },
 ];

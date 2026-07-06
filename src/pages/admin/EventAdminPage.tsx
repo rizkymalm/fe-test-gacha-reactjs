@@ -11,7 +11,7 @@ const EventAdminPage = () => {
     const [dialogForm, setDialogForm] = useState(false);
     return (
         <Page title="User List | Admin">
-            <Title title="Welcome" subtitle="Admin page" />
+            <Title title="Event List" subtitle="Event List page" />
             <div className="min-h-screen w-full items-center justify-center p-2 text-text-light-primary dark:text-text-dark-primary">
                 <div className="grid w-full grid-cols-12 gap-4">
                     <div className="relative col-span-12">

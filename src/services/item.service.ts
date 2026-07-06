@@ -6,7 +6,7 @@ const request = new Api({
 });
 
 export const itemList = async (token: string, queries: any) => {
-    const response = await request.get('/item', {
+    const response = await request.get('/item/admin/list', {
         token,
         queries,
     });
@@ -15,6 +15,12 @@ export const itemList = async (token: string, queries: any) => {
 
 export const itemListGroup = async (token: string) => {
     const response = await request.get('/item/group', {
+        token,
+    });
+    return response;
+};
+export const itemCreate = async (token: string, data: any) => {
+    const response = await request.post('/item/admin/create', data, {
         token,
     });
     return response;
