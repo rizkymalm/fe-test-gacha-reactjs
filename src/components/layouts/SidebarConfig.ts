@@ -45,12 +45,12 @@ export const sidebarConfig: PropSidebar[] = [
         type: 'menu',
         category: [UserRole.ADMIN],
         submenu: [
-            {
-                name: 'User',
-                link: '/admin/user',
-                pathMatch: '/admin/user',
-                type: 'menu',
-            },
+            // {
+            //     name: 'User',
+            //     link: '/admin/user',
+            //     pathMatch: '/admin/user',
+            //     type: 'menu',
+            // },
             {
                 name: 'Event',
                 link: '/admin/event',
@@ -61,6 +61,12 @@ export const sidebarConfig: PropSidebar[] = [
                 name: 'Item',
                 link: '/admin/item',
                 pathMatch: '/admin/item',
+                type: 'menu',
+            },
+            {
+                name: 'History',
+                link: '/admin/history',
+                pathMatch: '/admin/history',
                 type: 'menu',
             },
         ],

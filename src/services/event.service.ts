@@ -5,6 +5,13 @@ const request = new Api({
     xApiKey: '',
 });
 
+export const eventActive = async (token: string) => {
+    const response = await request.get('/event/active', {
+        token,
+    });
+    return response;
+};
+
 export const eventList = async (token: string, queries: any) => {
     const response = await request.get('/event/admin/list', {
         token,
@@ -37,9 +44,13 @@ export const eventUpdateStatus = async (
     data: any,
     id: string
 ) => {
-    const response = await request.patch(`/event/update-status/${id}`, data, {
-        token,
-    });
+    const response = await request.patch(
+        `/event/admin/update-status/${id}`,
+        data,
+        {
+            token,
+        }
+    );
     return response;
 };
 
@@ -51,7 +62,7 @@ export const eventUpdateItem = async (token: string, data: any, id: string) => {
 };
 
 export const createEvent = async (token: string, data: any) => {
-    const response = await request.post(`/event/create`, data, {
+    const response = await request.post(`/event/admin/create`, data, {
         token,
     });
     return response;

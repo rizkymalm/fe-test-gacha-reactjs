@@ -9,6 +9,7 @@ import Pagination from '@/components/tables/Pagination';
 import { getItemList } from '@/redux/actions/item';
 import type { Reducers } from '@/redux/types';
 import { badgeName } from '@/utils/badge';
+import { numberCeil } from '@/utils/numbers';
 
 import FormCreateItem from './FormCreateItem';
 
@@ -60,8 +61,8 @@ const ItemList = () => {
                 </div>
                 {itemState?.list?.loading ? (
                     <Spinner color="accent" size="lg" />
-                ) : itemState.list?.data ? (
-                    itemState.list.data.map((data: any) => (
+                ) : itemState.list?.data?.data ? (
+                    itemState.list.data.data.map((data: any) => (
                         <div
                             className="group relative col-span-2 rounded-md border-accent-light/30 p-4 dark:border-accent-dark/30"
                             style={{
@@ -113,8 +114,10 @@ const ItemList = () => {
             <Pagination
                 params={params}
                 setParams={setParams}
-                totalPage={2}
-                total={10}
+                totalPage={numberCeil(
+                    itemState.list.data.totalData / params.limit || 0
+                )}
+                total={itemState?.list?.data?.totalData}
                 loading={false}
             />
         </CardBasic>

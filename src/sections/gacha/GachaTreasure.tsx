@@ -57,7 +57,7 @@ const GachaTreasure = () => {
                     />
                 </DialogContent>
             </Dialog>
-            <div className="relative h-80 w-full">
+            <div className="relative h-125 w-full">
                 <div className="gacha-static box-close absolute inset-x-0 bottom-14 m-auto">
                     <div className="translate-y-[100px] scale-0 text-text-gold transition-all duration-300">
                         <h2 className="ty-h5 font-extrabold">2000</h2>

@@ -31,3 +31,8 @@ export function decimalPlaces(number: number) {
     const result = Math.round(number * 100) / 1000;
     return result;
 }
+
+export function numberCeil(number: number) {
+    const result = Math.ceil(number);
+    return result;
+}

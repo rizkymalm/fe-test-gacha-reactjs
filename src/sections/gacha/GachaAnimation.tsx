@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ButtonGame from '@/components/buttons/ButtonGame';
 import SpotlightParticlesBadge from '@/components/features/SpotlightParticlesBadge';
 import { getGachaRandom } from '@/redux/actions/gacha';
+import { getUserInventory, getUserLatestInventory } from '@/redux/actions/user';
 import { getWalletAmount } from '@/redux/actions/wallet';
 import type { Reducers } from '@/redux/types';
 import { badgeName } from '@/utils/badge';
@@ -88,7 +89,29 @@ const GachaAnimation = ({ count, onCloseDialog }: Props) => {
             }, 2000);
         }
     };
-
+    const handleOnClose = async () => {
+        await dispatch<any>(
+            getUserInventory({
+                queries: {
+                    page: 1,
+                    limit: 6,
+                },
+                callback: () => {
+                    dispatch<any>(
+                        getUserLatestInventory({
+                            queries: {
+                                page: 1,
+                                limit: 10,
+                            },
+                            callback: () => {
+                                onCloseDialog(false);
+                            },
+                        })
+                    );
+                },
+            })
+        );
+    };
     return (
         <div
             className="relative m-auto h-125 w-full rounded-xl bg-dark-1"
@@ -143,7 +166,7 @@ const GachaAnimation = ({ count, onCloseDialog }: Props) => {
                         size="md"
                         type="button"
                         fullWidth
-                        onClick={() => onCloseDialog(false)}
+                        onClick={handleOnClose}
                     />
                 ) : reward && rewardOrder < gachaCount ? (
                     <ButtonGame

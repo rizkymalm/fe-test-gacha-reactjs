@@ -6,6 +6,16 @@ const initialState: UserState = {
         data: '',
         error: undefined,
     },
+    inventory: {
+        loading: false,
+        data: '',
+        error: undefined,
+    },
+    latestInventory: {
+        loading: false,
+        data: '',
+        error: undefined,
+    },
     actions: {
         loading: false,
         error: '',
@@ -43,6 +53,64 @@ export const userReducers = (state = initialState, action = initialAction) => {
             return {
                 ...state,
                 profile: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
+                },
+            };
+
+        // INVENTORY user
+        case 'USER_INVENTORY_SUCCESS':
+            return {
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'USER_INVENTORY_LOADING':
+            return {
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    loading: true,
+                    error: '',
+                },
+            };
+        case 'USER_INVENTORY_ERROR':
+            return {
+                ...state,
+                inventory: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
+                },
+            };
+
+        // LATEST INVENTORY user
+        case 'USER_LATEST_INVENTORY_SUCCESS':
+            return {
+                ...state,
+                latestInventory: {
+                    ...state.latestInventory,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'USER_LATEST_INVENTORY_LOADING':
+            return {
+                ...state,
+                latestInventory: {
+                    ...state.latestInventory,
+                    loading: true,
+                    error: '',
+                },
+            };
+        case 'USER_LATEST_INVENTORY_ERROR':
+            return {
+                ...state,
+                latestInventory: {
                     loading: false,
                     data: '',
                     error: action.payload,

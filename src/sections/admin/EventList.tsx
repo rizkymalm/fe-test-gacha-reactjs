@@ -22,12 +22,13 @@ import {
 } from '@/components/tables/Table';
 import { getEventList, patchEventUpdateStatus } from '@/redux/actions/event';
 import type { Reducers } from '@/redux/types';
+import { numberCeil } from '@/utils/numbers';
 
 const EventList = () => {
     const dispatch = useDispatch();
     const eventState = useSelector((state: Reducers) => state.event);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const [selected, setSelected] = useState(-1);
+    const [selected, setSelected] = useState<number | null>(null);
     const [dialogConfirmation, setDialogConfirmation] = useState(false);
     const [params, setParams] = useState({
         search: '',
@@ -44,10 +45,7 @@ const EventList = () => {
                 callback: async () => {
                     dispatch<any>(
                         getEventList({
-                            queries: {
-                                page: 1,
-                                limit: 10,
-                            },
+                            queries: params,
                             callback: () => {
                                 setDialogConfirmation(false);
                             },
@@ -80,14 +78,17 @@ const EventList = () => {
                 <DialogContent>
                     <p className="ty-body">
                         Are you sure want to{' '}
-                        {eventState?.list?.data[selected]?.status === 'ACTIVE'
+                        {selected !== null &&
+                        eventState?.list?.data?.data[selected]?.status ===
+                            'ACTIVE'
                             ? 'Deactivate'
                             : 'Activate'}{' '}
                         this event?
                     </p>
                     <p className="ty-label">
-                        {eventState?.list?.data[selected]?.status ===
-                            'INACTIVE' &&
+                        {selected !== null &&
+                            eventState?.list?.data?.data[selected]?.status ===
+                                'INACTIVE' &&
                             'If you activate this event, other running event will be automatically change to INACTIVE'}
                     </p>
                 </DialogContent>
@@ -98,6 +99,7 @@ const EventList = () => {
                         size="sm"
                         variant="outline"
                         fullWidth
+                        onClick={() => setDialogConfirmation(false)}
                     />
                     <ButtonPrimary
                         text="Yes"
@@ -106,13 +108,15 @@ const EventList = () => {
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                            handleUpdateStatus(
-                                eventState?.list?.data[selected]?._id,
-                                eventState?.list?.data[selected]?.status ===
-                                    'INACTIVE'
-                                    ? 'ACTIVE'
-                                    : 'INACTIVE'
-                            );
+                            if (selected !== null) {
+                                handleUpdateStatus(
+                                    eventState?.list?.data?.data[selected]?._id,
+                                    eventState?.list?.data?.data[selected]
+                                        ?.status === 'INACTIVE'
+                                        ? 'ACTIVE'
+                                        : 'INACTIVE'
+                                );
+                            }
                         }}
                     />
                 </DialogActions>
@@ -127,7 +131,7 @@ const EventList = () => {
                 <ul className="w-full">
                     <li className="hover:bg-accent-light/20 hover:dark:bg-accent-dark/20">
                         <button
-                            className={`flex size-full items-center gap-4 px-4 py-2 text-left align-middle ${eventState?.list?.data[selected]?.status === 'ACTIVE' ? 'text-red' : 'text-accent-light'}`}
+                            className={`flex size-full items-center gap-4 px-4 py-2 text-left align-middle ${selected !== null && eventState?.list?.data?.data[selected]?.status === 'ACTIVE' ? 'text-red' : 'text-accent-light'}`}
                             type="button"
                             onClick={() => {
                                 setAnchorEl(null);
@@ -139,8 +143,9 @@ const EventList = () => {
                                 width={18}
                                 height={18}
                             />
-                            {eventState?.list?.data[selected]?.status ===
-                            'ACTIVE'
+                            {selected !== null &&
+                            eventState?.list?.data?.data[selected]?.status ===
+                                'ACTIVE'
                                 ? 'Deactivate'
                                 : 'Activate'}
                         </button>
@@ -150,7 +155,7 @@ const EventList = () => {
                             className="flex size-full items-center gap-4 px-4 py-2 text-left align-middle"
                             type="button"
                             onClick={() => {
-                                window.location.href = `/admin/event/detail/${eventState?.list?.data[selected]?._id}`;
+                                window.location.href = `/admin/event/detail/${selected !== null && eventState?.list?.data?.data[selected]?._id}`;
                             }}
                         >
                             <Icon
@@ -169,13 +174,15 @@ const EventList = () => {
                 subtitle="List Event"
                 padding="dense"
                 sticky
-                className="max-h-70"
+                className="h-100 max-h-100"
                 contentAfter={
                     <Pagination
                         params={params}
                         setParams={setParams}
-                        totalPage={2}
-                        total={10}
+                        totalPage={numberCeil(
+                            eventState.list.data.totalData / params.limit || 0
+                        )}
+                        total={eventState?.list?.data?.totalData}
                         loading={false}
                     />
                 }
@@ -194,8 +201,8 @@ const EventList = () => {
                             <Tr>
                                 <Td colSpan={4}>Loading</Td>
                             </Tr>
-                        ) : eventState?.list?.data ? (
-                            eventState?.list?.data.map(
+                        ) : eventState?.list?.data?.data ? (
+                            eventState?.list?.data.data.map(
                                 (item: any, index: number) => (
                                     <Tr hover zebra>
                                         <Td>{item.event}</Td>
@@ -210,14 +217,13 @@ const EventList = () => {
                                                     event.stopPropagation()
                                                 }
                                                 onClick={(e: any) => {
+                                                    setSelected(index);
                                                     setAnchorEl(null);
                                                     setAnchorEl(
                                                         e.currentTarget
                                                     );
-                                                    setSelected(index);
                                                 }}
                                             />
-                                            {/* <Icon icon="mdi:dots-vertical" /> */}
                                         </Td>
                                     </Tr>
                                 )

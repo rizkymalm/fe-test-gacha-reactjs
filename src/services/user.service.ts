@@ -11,3 +11,19 @@ export const userProfile = async (token: string) => {
     });
     return response;
 };
+
+export const userInventory = async (token: string, queries: any) => {
+    const response = await request.get('/user/inventory', {
+        token,
+        queries,
+    });
+    return response;
+};
+
+export const userLatestInventory = async (token: string, queries: any) => {
+    const response = await request.get('/user/inventory/latest', {
+        token,
+        queries,
+    });
+    return response;
+};

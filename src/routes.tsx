@@ -4,6 +4,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import EventAdminPage from './pages/admin/EventAdminPage';
 import EventDetailPage from './pages/admin/EventDetailPage';
+import HistoryAdminPage from './pages/admin/HistoryAdminPage';
 import ItemAdminPage from './pages/admin/ItemAdminPage';
 import UserAdminPage from './pages/admin/UserAdminPage';
 import GachaPage from './pages/GachaPage';
@@ -57,6 +58,10 @@ export default function Router() {
                                 {
                                     path: 'item',
                                     element: <ItemAdminPage />,
+                                },
+                                {
+                                    path: 'history',
+                                    element: <HistoryAdminPage />,
                                 },
                             ],
                         },

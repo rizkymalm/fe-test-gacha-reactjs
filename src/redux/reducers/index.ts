@@ -6,6 +6,7 @@ import type { Action } from '../types';
 import { authReducers } from './authReducers';
 import { eventReducers } from './eventReducers';
 import { gachaReducers } from './gachaReducers';
+import { historyReducers } from './historyReducers';
 import { itemReducers } from './itemReducers';
 import { userReducers } from './userReducers';
 import { walletReducers } from './walletReducers';
@@ -27,6 +28,7 @@ const appReducer = combineReducers({
     gacha: gachaReducers,
     item: itemReducers,
     event: eventReducers,
+    history: historyReducers,
 });
 
 const rootReducer = (state: any, action: Action) => {

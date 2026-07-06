@@ -1,5 +1,6 @@
 import {
     createEvent,
+    eventActive,
     eventDetail,
     eventItemAdd,
     eventItemDeleteItem,
@@ -25,6 +26,46 @@ interface PropsAction {
     id?: string;
 }
 
+export const getEventActive =
+    ({ callback }: PropsGet) =>
+    async (dispatch: Dispatch, getState: any) => {
+        dispatch({
+            type: 'EVENT_ACTIVE_LOADING',
+        });
+        try {
+            const { token } = getState().auth;
+            const response = await eventActive(token.accessToken);
+            dispatch({
+                type: 'EVENT_ACTIVE_SUCCESS',
+                payload: response,
+            });
+            if (callback) {
+                callback();
+            }
+        } catch (error: any) {
+            if (error && error.response) {
+                if (error.response.status === 401) {
+                    dispatch(
+                        postRefreshToken({
+                            callback: () => {
+                                dispatch(getEventActive({ callback }));
+                            },
+                        })
+                    );
+                }
+                dispatch({
+                    type: 'EVENT_ACTIVE_ERROR',
+                    payload: error.response.data,
+                });
+            } else {
+                dispatch({
+                    type: 'EVENT_ACTIVE_ERROR',
+                    payload: error,
+                });
+            }
+        }
+    };
+
 export const getEventList =
     ({ queries, callback }: PropsGet) =>
     async (dispatch: Dispatch, getState: any) => {
@@ -36,7 +77,7 @@ export const getEventList =
             const response = await eventList(token.accessToken, queries);
             dispatch({
                 type: 'EVENT_LIST_SUCCESS',
-                payload: response.data,
+                payload: response,
             });
             if (callback) {
                 callback();

@@ -26,7 +26,7 @@ export const getItemList =
             const response = await itemList(token.accessToken, queries);
             dispatch({
                 type: 'ITEM_LIST_SUCCESS',
-                payload: response.data,
+                payload: response,
             });
             if (callback) {
                 callback();
