@@ -32,7 +32,7 @@ export default function Router() {
                     children: [
                         {
                             path: 'dashboard',
-                            element: 'dashboard',
+                            element: <GachaPage />,
                         },
                         {
                             path: 'gacha',

@@ -22,14 +22,6 @@ interface PropSidebar {
 
 export const sidebarConfig: PropSidebar[] = [
     {
-        name: 'Dashboard',
-        icon: 'mdi:view-dashboard-outline',
-        link: '/dashboard',
-        pathMatch: '/dashboard',
-        type: 'menu',
-        category: [UserRole.ADMIN, UserRole.USER],
-    },
-    {
         name: 'Gacha',
         icon: 'ph:treasure-chest',
         link: '/gacha',
