@@ -6,6 +6,19 @@ The project demonstrates a complete gacha system implementation including authen
 
 ---
 
+## 🎥 Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/45XHvSvgWVg/maxresdefault.jpg)](https://www.youtube.com/watch?v=45XHvSvgWVg)
+
+Click the image above to watch the full demo on YouTube.
+
+Link Demo: https://gacha.rizkymalm.com/
+
+Repository: https://github.com/rizkymalm/fe-test-gacha-reactjs/
+
+---
+
+
 ## ✨ Features
 
 ### Authentication
