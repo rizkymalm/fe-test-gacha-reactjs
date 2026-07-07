@@ -27,3 +27,26 @@ export const userLatestInventory = async (token: string, queries: any) => {
     });
     return response;
 };
+
+// admin
+export const userList = async (token: string, queries: any) => {
+    const response = await request.get('/user/admin/list', {
+        token,
+        queries,
+    });
+    return response;
+};
+
+export const userDetail = async (token: string, user: string) => {
+    const response = await request.get(`/user/admin/detail/${user}`, {
+        token,
+    });
+    return response;
+};
+
+export const userCreate = async (token: string, data: any) => {
+    const response = await request.post(`/user/admin/create`, data, {
+        token,
+    });
+    return response;
+};

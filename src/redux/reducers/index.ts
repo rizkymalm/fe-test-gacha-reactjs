@@ -8,6 +8,7 @@ import { eventReducers } from './eventReducers';
 import { gachaReducers } from './gachaReducers';
 import { historyReducers } from './historyReducers';
 import { itemReducers } from './itemReducers';
+import { roleReducers } from './roleReducers';
 import { userReducers } from './userReducers';
 import { walletReducers } from './walletReducers';
 
@@ -29,6 +30,7 @@ const appReducer = combineReducers({
     item: itemReducers,
     event: eventReducers,
     history: historyReducers,
+    role: roleReducers,
 });
 
 const rootReducer = (state: any, action: Action) => {

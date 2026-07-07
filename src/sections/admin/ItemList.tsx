@@ -114,7 +114,7 @@ const ItemList = () => {
             <Pagination
                 params={params}
                 setParams={setParams}
-                totalPage={numberCeil(
+                totalPage={itemState.list.data.totalData && numberCeil(
                     itemState.list.data.totalData / params.limit || 0
                 )}
                 total={itemState?.list?.data?.totalData}

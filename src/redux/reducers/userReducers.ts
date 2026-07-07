@@ -16,6 +16,16 @@ const initialState: UserState = {
         data: '',
         error: undefined,
     },
+    list: {
+        loading: false,
+        data: '',
+        error: undefined,
+    },
+    detail: {
+        loading: false,
+        data: '',
+        error: undefined,
+    },
     actions: {
         loading: false,
         error: '',
@@ -30,7 +40,7 @@ const initialAction: Action = {
 
 export const userReducers = (state = initialState, action = initialAction) => {
     switch (action.type) {
-        // detail user
+        // profile user
         case 'USER_PROFILE_SUCCESS':
             return {
                 ...state,
@@ -111,6 +121,64 @@ export const userReducers = (state = initialState, action = initialAction) => {
             return {
                 ...state,
                 latestInventory: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
+                },
+            };
+
+        // list user
+        case 'USER_LIST_SUCCESS':
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'USER_LIST_LOADING':
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    loading: true,
+                    error: '',
+                },
+            };
+        case 'USER_LIST_ERROR':
+            return {
+                ...state,
+                list: {
+                    loading: false,
+                    data: '',
+                    error: action.payload,
+                },
+            };
+
+        // detail user
+        case 'USER_DETAIL_SUCCESS':
+            return {
+                ...state,
+                detail: {
+                    ...state.detail,
+                    loading: false,
+                    data: action.payload,
+                },
+            };
+        case 'USER_DETAIL_LOADING':
+            return {
+                ...state,
+                detail: {
+                    ...state.detail,
+                    loading: true,
+                    error: '',
+                },
+            };
+        case 'USER_DETAIL_ERROR':
+            return {
+                ...state,
+                detail: {
                     loading: false,
                     data: '',
                     error: action.payload,

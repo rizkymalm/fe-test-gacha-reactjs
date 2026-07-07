@@ -179,7 +179,7 @@ const EventList = () => {
                     <Pagination
                         params={params}
                         setParams={setParams}
-                        totalPage={numberCeil(
+                        totalPage={eventState?.list?.data?.totalData && numberCeil(
                             eventState.list.data.totalData / params.limit || 0
                         )}
                         total={eventState?.list?.data?.totalData}

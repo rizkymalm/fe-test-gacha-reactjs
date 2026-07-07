@@ -61,7 +61,7 @@ const Login = () => {
                                 <AlertContent type="info">
                                     <p>
                                         Use for demo{' '}
-                                        <b>digimal@rizkymalm.com</b> with
+                                        <b>rizkymalm@gmail.com</b> with
                                         password <b>testpassword</b>
                                     </p>
                                 </AlertContent>

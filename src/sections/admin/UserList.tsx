@@ -12,27 +12,27 @@ import {
     Thead,
     Tr,
 } from '@/components/tables/Table';
-import { getHistoryList } from '@/redux/actions/history';
+import { getUserList } from '@/redux/actions/user';
 import type { Reducers } from '@/redux/types';
 import { numberCeil } from '@/utils/numbers';
 
-const HistoryList = () => {
+const UserList = () => {
     const dispatch = useDispatch();
-    const historyState = useSelector((state: Reducers) => state.history);
+    const userState = useSelector((state: Reducers) => state.user);
     const [params, setParams] = useState({
         search: '',
         page: 1,
         limit: 10,
     });
     useEffect(() => {
-        async function historyGet() {
+        async function userListGet() {
             await dispatch<any>(
-                getHistoryList({
+                getUserList({
                     queries: params,
                 })
             );
         }
-        historyGet();
+        userListGet();
     }, [dispatch, params]);
 
     return (
@@ -49,14 +49,13 @@ const HistoryList = () => {
                         params={params}
                         setParams={setParams}
                         totalPage={
-                            historyState?.list?.data?.totalData
-                                ? numberCeil(
-                                      historyState.list.data.totalData /
-                                          params.limit || 0
-                                  )
-                                : 1
+                            userState?.list?.data?.totalData &&
+                            numberCeil(
+                                userState.list.data.totalData / params.limit ||
+                                    0
+                            )
                         }
-                        total={historyState?.list?.data?.totalData}
+                        total={userState?.list?.data?.totalData}
                         loading={false}
                     />
                 }
@@ -64,46 +63,34 @@ const HistoryList = () => {
                 <Table fullWidth>
                     <Thead sticky>
                         <Tr zebra>
-                            <Th align="left">User</Th>
-                            <Th align="left">Items</Th>
-                            <Th>Transaction ID</Th>
-                            <Th>Date</Th>
+                            <Th align="left">Name</Th>
+                            <Th align="left">Email</Th>
+                            <Th>Balance</Th>
+                            <Th>Role</Th>
+                            <Th>Created Date</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {historyState?.list?.loading ? (
+                        {userState?.list?.loading ? (
                             <Tr>
                                 <Td colSpan={4}>Loading</Td>
                             </Tr>
-                        ) : historyState?.list?.data?.data ? (
-                            historyState?.list?.data.data.map((item: any) => (
+                        ) : userState?.list?.data?.data ? (
+                            userState?.list?.data?.data.map((data: any) => (
                                 <Tr hover zebra>
                                     <Td>
                                         <div className="flex flex-col">
-                                            <p>{`${item.user[0]?.firstName} ${item.user[0]?.lastName}`}</p>
+                                            <p>{`${data.firstName} ${data.lastName}`}</p>
                                             <p className="ty-label">
-                                                {item.user[0].email}
+                                                {data.username}
                                             </p>
                                         </div>
                                     </Td>
-                                    <Td>
-                                        <div className="flex gap-2">
-                                            <img
-                                                src={item.items[0]?.image}
-                                                alt="aa"
-                                                width={30}
-                                            />
-                                            <div className="flex flex-col">
-                                                <p>{item.items[0]?.name}</p>
-                                                <p className="ty-label">
-                                                    {item.items[0]?.tier}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Td>
-                                    <Td align="center">{item.referenceId}</Td>
+                                    <Td>{data.email}</Td>
+                                    <Td align='center'>{data.wallets[0].balance}</Td>
+                                    <Td align="center">{data.roles.role}</Td>
                                     <Td align="center">
-                                        {moment(item.createdAt).format(
+                                        {moment(data.createdAt).format(
                                             'DD-MMM-YYYY'
                                         )}
                                     </Td>
@@ -121,4 +108,4 @@ const HistoryList = () => {
     );
 };
 
-export default HistoryList;
+export default UserList;

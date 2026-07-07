@@ -28,6 +28,7 @@ export interface Reducers {
     item: ItemState;
     event: EventState;
     history: HistoryState;
+    role: RoleState;
 }
 
 export interface AuthState {
@@ -93,6 +94,16 @@ export interface UserState {
         data: any;
     };
     latestInventory: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    list: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    detail: {
         loading: boolean;
         error: any | undefined;
         data: any;
@@ -173,6 +184,20 @@ export interface EventState {
 }
 
 export interface HistoryState {
+    list: {
+        loading: boolean;
+        error: any | undefined;
+        data: any;
+    };
+    actions?: {
+        loading: boolean;
+        error: any;
+        type: 'success' | 'failed' | null;
+        message: any;
+    };
+}
+
+export interface RoleState {
     list: {
         loading: boolean;
         error: any | undefined;
