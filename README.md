@@ -1,75 +1,174 @@
-# React + TypeScript + Vite
+# 🎮 Gacha Game Technical Assessment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Gacha Game application developed as a technical assessment.
 
-Currently, two official plugins are available:
+The project demonstrates a complete gacha system implementation including authentication, wallet management, inventory management, configurable event-based drop rates, and MongoDB atomic transactions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Authentication
 
-## Expanding the ESLint configuration
+- JWT Authentication
+- Access Token (15 minutes)
+- Refresh Token (7 days)
+- Password hashing using bcrypt
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### User
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Login
+- Refresh Token
+- View Wallet Balance
+- View Inventory
+- View Gacha History
+- Single Draw Gacha
+- Multiple Draw Gacha (x10)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Admin
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Manage Items
+- Manage Events
+- Configure Event Items
+- Configure Drop Rates
 
+### Gacha System
+
+- Weighted Random Algorithm
+- Configurable Drop Rates
+- Event-based Gacha
+- Treasure Chest Animation
+
+### Wallet
+
+- Coin Balance
+- Transaction History
+
+### Inventory
+
+- Item Ownership
+- Quantity System
+- Optimized using MongoDB bulkWrite()
+
+### Database
+
+- MongoDB Transaction
+- Atomic Operations
+- Soft Delete
+- Event & Item Relationship
+
+---
+
+# 🛠 Tech Stack
+
+- **React.js**
+- **Tailwind CSS**
+- **Redux** – Global workspace state management
+- TypeScript
+
+Deployed on **Vercel**.
+
+---
+
+# 🚀 Getting Started
+
+## Frontend
+
+Install dependencies
+
+```bash
+npm install
+# or
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# ⚙ Environment Variables
+
+Frontend
+
+```env
+NODE_ENV=
+VITE_API_URL=
+VITE_DUMMY_API_URL=
+```
+
+---
+
+# 📖 Documentation
+
+Additional documentation is included in:
 
 ```
+docs/
+```
+
+Contents include:
+
+- System Architecture
+- Database Design (ERD)
+- Authentication Flow
+- Wallet Flow
+- Inventory Flow
+- Gacha Flow
+- Weighted Random Algorithm
+- Atomic Transaction
+- API Overview
+- Design Decisions
+
+---
+
+# 📬 Postman Collection
+
+Postman files are provided for API testing.
+
+```
+postman/
+```
+
+Includes:
+
+- API Collection
+- Environment
+
+---
+
+# 📌 Design Highlights
+
+- JWT Authentication
+- Refresh Token
+- MongoDB Transaction
+- Weighted Random Sampling
+- Event-based Drop Rate Configuration
+- Inventory Optimization using bulkWrite()
+- Wallet Transaction History
+- Configurable Gacha Events
+
+---
+## 🎨 UI Foundation
+
+This project is built on top of **Digimal**, a modern dashboard template created by Rizki Malem.
+
+Digimal is a customizable dashboard UI system designed for scalable web applications, built with:
+
+- Next.js
+- Tailwind CSS
+- Modular component architecture
+
+You can explore the Digimal template here:  
+https://rizkymalm.site/
+
+Using Digimal as the UI foundation allowed this project to focus more on interaction systems and configurator logic rather than rebuilding layout infrastructure from scratch.
+
+---
